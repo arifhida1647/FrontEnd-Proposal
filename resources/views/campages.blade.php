@@ -63,27 +63,35 @@
 
 <body class="bg-gray-800">
     <nav
-        class="fixed top-3 left-1/2 transform -translate-x-1/2 p-4 rounded-full z-50 w-full max-w-lg 
-        bg-gray-800">
-        <div class="flex justify-center items-center w-full h-full">
-            <div class="flex items-center">
-                <!-- Gantilah <FaBeer> dengan elemen HTML biasa jika perlu -->
-                <span class="text-white mr-2 text-2xl"><img src="{{ asset('LOGO.png') }}" alt=""
-                        style="max-width: 50px"></span>
-                <span class="text-white text-xl font-bold">UPN Veteran Jakarta</span>
+        class="fixed top-3 left-1/2 transform -translate-x-1/2 p-3 rounded-full z-50 w-full max-w-lg 
+bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
+        <div class="flex justify-between items-center px-6">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('LOGO.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex space-x-6">
+                <a href="/"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Home</a>
+                <a href="/cam"
+                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Camera</a>
+                <a href="/iot"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
             </div>
         </div>
     </nav>
-    <section class="container mb-10 mt-32 px-4 mx-auto">
-        <section class="container my-10 px-4 mx-auto">
-            <div class="flex justify-center items-center h-full">
-                <img src="{{ 'https://service.arifhida.my.id/storage/' . $images->path_image }}" alt="Centered Image"
-                    class="w-1/3 h-auto rounded-lg shadow-white" />
-            </div>
-        </section>
+    <!-- Container full height -->
+    <section class="w-full h-screen flex items-center justify-center px-4">
+        <div id="video-container" class="w-full h-full flex items-center justify-center">
+            <iframe id="cameraFrame" src="https://8bb679e8506c35d8.p66.rt3.io/camera" class="w-full h-full"
+                allow="autoplay"></iframe>
+        </div>
     </section>
     <section class="container mb-8 px-4 mx-auto">
         <h2 class="text-4xl font-bold mb-10 text-center text-white">Camera Sensor</h2>
+        <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4">
             @foreach ($cam as $item)
                 @php
@@ -95,6 +103,7 @@
                 </div>
             @endforeach
         </div>
+        <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
 
     <script>
@@ -102,6 +111,43 @@
         setInterval(function() {
             window.location.reload();
         }, 5000); // 2000 milliseconds = 2 seconds
+    </script>
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById("navbar");
+        const iframe = document.getElementById("cameraFrame");
+        const videoContainer = document.getElementById("video-container");
+
+        // Event untuk sembunyikan navbar saat scroll ke bawah
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                navbar.style.transform = "translateY(-100px)";
+            } else {
+                navbar.style.transform = "translateY(0)";
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Cek apakah iframe berhasil dimuat
+        setTimeout(() => {
+            if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
+                videoContainer.innerHTML = `
+            <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
+                <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M15 9l-6 6m0-6l6 6"></path>
+                </svg>
+                <span>Kamera Tidak Terhubung</span>
+            </div>
+        `;
+            }
+        }, 2000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
     </script>
 
 </body>

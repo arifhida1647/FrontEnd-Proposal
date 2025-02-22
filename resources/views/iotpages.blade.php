@@ -63,19 +63,28 @@
 
 <body class="bg-gray-800">
     <nav
-        class="fixed top-3 left-1/2 transform -translate-x-1/2 p-4 rounded-full z-50 w-full max-w-lg 
-        bg-gray-800">
-        <div class="flex justify-center items-center w-full h-full">
-            <div class="flex items-center">
-                <!-- Gantilah <FaBeer> dengan elemen HTML biasa jika perlu -->
-                <span class="text-white mr-2 text-2xl"><img src="{{ asset('LOGO.png') }}" alt=""
-                        style="max-width: 50px"></span>
-                <span class="text-white text-xl font-bold">UPN Veteran Jakarta</span>
+        class="fixed top-3 left-1/2 transform -translate-x-1/2 p-3 rounded-full z-50 w-full max-w-lg 
+bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
+        <div class="flex justify-between items-center px-6">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('LOGO.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex space-x-6">
+                <a href="/"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Home</a>
+                <a href="/cam"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
+                <a href="/iot"
+                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Iot</a>
             </div>
         </div>
     </nav>
     <section class="container mb-8 px-4 mt-36 mx-auto">
         <h2 class="text-4xl font-bold mb-10 text-center text-white">IOT Sensor</h2>
+        <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4">
             @foreach ($iot as $item)
                 @php
@@ -87,6 +96,7 @@
                 </div>
             @endforeach
         </div>
+        <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
 
     <script>
