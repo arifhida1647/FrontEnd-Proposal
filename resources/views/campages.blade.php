@@ -73,12 +73,12 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
 
             <!-- Navigation Links -->
             <div class="flex space-x-6">
-                <a href="/"
+                <a href="{{ url('/') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Home</a>
-                <a href="/cam"
-                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Camera</a>
-                <a href="/iot"
-                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
+                <a href="{{ url('cam') }}"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
+                <a href="{{ url('iot') }}"
+                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Iot</a>
             </div>
         </div>
     </nav>
