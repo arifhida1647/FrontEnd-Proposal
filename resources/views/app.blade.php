@@ -74,11 +74,11 @@
             <!-- Navigation Links -->
             <div class="flex space-x-6">
                 <a href="{{ url('/') }}"
-                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Home</a>
+                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Home</a>
                 <a href="{{ url('cam') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
                 <a href="{{ url('iot') }}"
-                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Iot</a>
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
             </div>
         </div>
     </nav>
