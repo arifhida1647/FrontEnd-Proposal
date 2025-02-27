@@ -73,11 +73,11 @@
 
             <!-- Navigation Links -->
             <div class="flex space-x-6">
-                <a href="{{ url('/') }}"
+                <a href="https://frontend-proposal-production.up.railway.app/"
                     class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Home</a>
-                <a href="{{ url('cam') }}"
+                <a href="https://frontend-proposal-production.up.railway.app/cam"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
-                <a href="{{ url('iot') }}"
+                <a href="https://frontend-proposal-production.up.railway.app/iot"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
             </div>
         </div>
