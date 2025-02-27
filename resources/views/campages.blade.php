@@ -73,11 +73,11 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
 
             <!-- Navigation Links -->
             <div class="flex space-x-6">
-                <a href="https://frontend-proposal-production.up.railway.app/"
+                <a href="{{ url('/') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Home</a>
-                <a href="https://frontend-proposal-production.up.railway.app/cam"
+                <a href="{{ url('cam') }}"
                     class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Camera</a>
-                <a href="https://frontend-proposal-production.up.railway.app/iot"
+                <a href="{{ url('iot') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
             </div>
         </div>
