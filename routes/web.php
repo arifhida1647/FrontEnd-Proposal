@@ -9,3 +9,6 @@ Route::get('/', [homeController::class, 'index']);
 Route::get('/iot', [iotController::class, 'index']);
 Route::get('/cam', [camController::class, 'index']);
 Route::get('/video', [videoController::class, 'index']);
+Route::get('/live', function () {
+    return view('live');
+});

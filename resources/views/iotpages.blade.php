@@ -79,6 +79,8 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
                 <a href="{{ url('iot') }}"
                     class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Iot</a>
+                <a href="{{ url('live') }}"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Live</a>
             </div>
         </div>
     </nav>
@@ -88,11 +90,15 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4">
             @foreach ($iot as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : 'bg-red-400';
+                    $bgColor =
+                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $slotText = $item->status == 0 || $item->status == 1 ? $item->slot : 'Sensor Terputus';
                 @endphp
                 <div
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}  {{ $loop->iteration == 8 ? 'mb-10' : '' }} {{ $loop->iteration == 16 ? 'mb-10' : '' }}">
-                    {{ $item->slot }}
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}  
+        {{ $loop->iteration == 8 ? 'mb-10' : '' }} 
+        {{ $loop->iteration == 16 ? 'mb-10' : '' }}">
+                    {{ $slotText }}
                 </div>
             @endforeach
         </div>

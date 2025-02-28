@@ -79,6 +79,8 @@
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
                 <a href="{{ url('iot') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
+                <a href="{{ url('live') }}"
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Live</a>
             </div>
         </div>
     </nav>

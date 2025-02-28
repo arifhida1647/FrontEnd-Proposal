@@ -76,37 +76,21 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                 <a href="{{ url('/') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Home</a>
                 <a href="{{ url('cam') }}"
-                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Camera</a>
+                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Camera</a>
                 <a href="{{ url('iot') }}"
                     class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Iot</a>
                 <a href="{{ url('live') }}"
-                    class="hover:text-white text-lg font-semibold transition-all duration-300 text-gray-400">Live</a>
+                    class="text-white text-lg font-semibold transition-all duration-300 hover:text-gray-400">Live</a>
             </div>
         </div>
     </nav>
-    <section class="container mb-8 px-4 mt-36 mx-auto">
-        <h2 class="text-4xl font-bold mb-10 text-center text-white">Camera Sensor</h2>
-        <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
-        <div class="grid grid-cols-4 md:grid-cols-4 gap-4">
-            @foreach ($cam as $item)
-                @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : 'bg-red-400';
-                @endphp
-                <div
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}  {{ $loop->iteration == 8 ? 'mb-10' : '' }} {{ $loop->iteration == 16 ? 'mb-10' : '' }}">
-                    {{ $item->slot }}
-                </div>
-            @endforeach
+    <!-- Container full height -->
+    <section class="w-full h-screen flex items-center justify-center px-4">
+        <div id="video-container" class="w-full h-full flex items-center justify-center">
+            <iframe id="cameraFrame" src="https://8bb679e8506c35d8.p66.rt3.io/camera" class="w-full h-full"
+                allow="autoplay"></iframe>
         </div>
-        <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
-
-    <script>
-        // Refresh the page every 2 seconds
-        setInterval(function() {
-            window.location.reload();
-        }, 5000); // 2000 milliseconds = 2 seconds
-    </script>
     <script>
         let lastScrollTop = 0;
         const navbar = document.getElementById("navbar");
