@@ -109,17 +109,17 @@
             </div>
             <div class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center">
                 <h2 class="text-xl font-bold">Update Time</h2>
-                <p class="text-2xl mt-4 text-white">{{ $images->created_at }}</p>
+                <p class="text-2xl mt-4 text-white">{{ now()->addHours(7) }}</p>
             </div>
         </div>
     </section>
     <section class="container mb-8 px-4 mx-auto">
         <h2 class="text-4xl font-bold mb-10 text-center text-white">Komparasi Parkir</h2>
         <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
-        <div class="grid grid-cols-4 md:grid-cols-4 gap-4">
-            @foreach ($combinedData as $id => $item)
+
+        <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+            @foreach ($combinedData->take(4) as $id => $item)
                 @php
-                    // Tentukan warna latar belakang berdasarkan both_status
                     $bgColor = match ($item['both_status']) {
                         0 => 'bg-green-400',
                         2 => 'bg-yellow-400',
@@ -128,13 +128,49 @@
                     };
                 @endphp
                 <div
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }} {{ $loop->iteration == 8 ? 'mb-10' : '' }} {{ $loop->iteration == 16 ? 'mb-10' : '' }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $item['slot'] }}
                 </div>
             @endforeach
         </div>
+
+        <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+            @foreach ($combinedData->slice(4, 8) as $id => $item)
+                @php
+                    $bgColor = match ($item['both_status']) {
+                        0 => 'bg-green-400',
+                        2 => 'bg-yellow-400',
+                        1 => 'bg-red-400',
+                        default => 'bg-red-400',
+                    };
+                @endphp
+                <div
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    {{ $item['slot'] }}
+                </div>
+            @endforeach
+        </div>
+
+        <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+            @foreach ($combinedData->slice(12, 8) as $id => $item)
+                @php
+                    $bgColor = match ($item['both_status']) {
+                        0 => 'bg-green-400',
+                        2 => 'bg-yellow-400',
+                        1 => 'bg-red-400',
+                        default => 'bg-red-400',
+                    };
+                @endphp
+                <div
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    {{ $item['slot'] }}
+                </div>
+            @endforeach
+        </div>
+
         <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
+
     <script>
         // Refresh the page every 2 seconds
         setInterval(function() {
