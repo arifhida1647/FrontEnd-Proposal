@@ -85,10 +85,14 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         </div>
     </nav>
     <!-- Container full height -->
-    <section class="w-full h-screen flex items-center justify-center px-4">
-        <div id="video-container" class="w-full h-full flex items-center justify-center">
-            <iframe id="cameraFrame" src="https://8bb679e8506c35d8.p66.rt3.io/camera" class="w-full h-full"
-                allow="autoplay"></iframe>
+    <section class="w-full h-screen flex items-center justify-center bg-gray-900">
+        <div id="video-container"
+            class="relative w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl border-4 border-gray-700">
+            <iframe id="cameraFrame" 
+                src="https://dad-cameroon-scratch-rid.trycloudflare.com/video_feed"
+                class="w-full h-full rounded-xl" 
+                allow="autoplay">
+            </iframe>
         </div>
     </section>
     <script>
@@ -110,24 +114,24 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
             lastScrollTop = scrollTop;
         });
 
-        // Cek apakah iframe berhasil dimuat
-        setTimeout(() => {
-            if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
-                videoContainer.innerHTML = `
-            <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
-                <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        d="M15 9l-6 6m0-6l6 6"></path>
-                </svg>
-                <span>Kamera Tidak Terhubung</span>
-            </div>
-        `;
-            }
-        }, 2000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
-    </script>
+    //     // Cek apakah iframe berhasil dimuat
+    //     setTimeout(() => {
+    //         if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
+    //             videoContainer.innerHTML = `
+    //         <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
+    //             <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
+    //                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    //                 <path stroke-linecap="round" stroke-linejoin="round" 
+    //                     d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
+    //                 <path stroke-linecap="round" stroke-linejoin="round" 
+    //                     d="M15 9l-6 6m0-6l6 6"></path>
+    //             </svg>
+    //             <span>Kamera Tidak Terhubung</span>
+    //         </div>
+    //     `;
+    //         }
+    //     }, 5000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
+    // </script>
 
 </body>
 
