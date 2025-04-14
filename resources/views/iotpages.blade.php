@@ -7,53 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        /* Style untuk popup */
-        #popup {
-            display: none;
-            /* Awalnya sembunyikan popup */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 1000px;
-            height: 80%;
-            max-height: 600px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        #popup iframe {
-            width: 100%;
-            height: 100%;
-        }
-
-        #popup .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgb(255, 0, 0);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            cursor: pointer;
-        }
-
-        /* Style untuk overlay */
-        #overlay {
-            display: none;
-            /* Awalnya sembunyikan overlay */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
 
         .shadow-white {
             box-shadow: 0 20px 25px rgba(255, 255, 255, 0.5);
@@ -90,35 +43,38 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($iot->take(4) as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : 'bg-red-400';
+                    $bgColor = $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
                 <div class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $item->slot }}
+                    {{ $text }}
                 </div>
             @endforeach
         </div>
-    
+        
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($iot->slice(4, 8) as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : 'bg-red-400';
+                    $bgColor = $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
                 <div class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $item->slot }}
+                    {{ $text }}
                 </div>
             @endforeach
         </div>
-    
+        
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($iot->slice(12, 8) as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : 'bg-red-400';
+                    $bgColor = $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
                 <div class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $item->slot }}
+                    {{ $text }}
                 </div>
             @endforeach
-        </div>
+        </div>        
         <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
 

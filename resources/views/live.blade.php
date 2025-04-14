@@ -87,9 +87,9 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
     <!-- Container full height -->
     <section class="w-full h-screen flex items-center justify-center bg-gray-900">
         <div id="video-container"
-            class="relative w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-2xl border-4 border-gray-700">
+            class="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl border-4 border-gray-700">
             <iframe id="cameraFrame" 
-                src="https://dad-cameroon-scratch-rid.trycloudflare.com/video_feed"
+                src="https://motorcycle-contest-expressed-techniques.trycloudflare.com/video_feed"
                 class="w-full h-full rounded-xl" 
                 allow="autoplay">
             </iframe>

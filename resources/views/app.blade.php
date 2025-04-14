@@ -101,11 +101,11 @@
             </div>
             <div class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center">
                 <h2 class="text-xl font-bold">Ketersediaan Parkir</h2>
-                <p class="text-4xl mt-4 text-green-400">{{ $countBothStatus0 }}</p>
+                <p class="text-4xl mt-4 text-green-400">{{ $tersedia }}</p>
             </div>
             <div class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center">
                 <h2 class="text-xl font-bold">Kemungkinan Kosong</h2>
-                <p class="text-4xl mt-4 text-yellow-300 ">{{ $countBothStatus2 }}</p>
+                <p class="text-4xl mt-4 text-yellow-300 ">{{ $kemungkinanTersedia }}</p>
             </div>
             <div class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center">
                 <h2 class="text-xl font-bold">Update Time</h2>
@@ -119,51 +119,30 @@
 
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($combinedData->take(4) as $id => $item)
-                @php
-                    $bgColor = match ($item['both_status']) {
-                        0 => 'bg-green-400',
-                        2 => 'bg-yellow-400',
-                        1 => 'bg-red-400',
-                        default => 'bg-red-400',
-                    };
-                @endphp
                 <div
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $item['slot'] }}
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center {{ $item['warna'] }}">
+                    <div>{{ $item['slot'] }}</div>
+                    <div class="text-l font-normal">{{ $item['deskripsi'] }}</div>
                 </div>
             @endforeach
         </div>
 
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($combinedData->slice(4, 8) as $id => $item)
-                @php
-                    $bgColor = match ($item['both_status']) {
-                        0 => 'bg-green-400',
-                        2 => 'bg-yellow-400',
-                        1 => 'bg-red-400',
-                        default => 'bg-red-400',
-                    };
-                @endphp
                 <div
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $item['slot'] }}
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center {{ $item['warna'] }}">
+                    <div>{{ $item['slot'] }}</div>
+                    <div class="text-l font-normal">{{ $item['deskripsi'] }}</div>
                 </div>
             @endforeach
         </div>
 
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($combinedData->slice(12, 8) as $id => $item)
-                @php
-                    $bgColor = match ($item['both_status']) {
-                        0 => 'bg-green-400',
-                        2 => 'bg-yellow-400',
-                        1 => 'bg-red-400',
-                        default => 'bg-red-400',
-                    };
-                @endphp
                 <div
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $item['slot'] }}
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center {{ $item['warna'] }}">
+                    <div>{{ $item['slot'] }}</div>
+                    <div class="text-l font-normal">{{ $item['deskripsi'] }}</div>
                 </div>
             @endforeach
         </div>
