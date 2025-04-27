@@ -1,0 +1,36 @@
+name: Deploy Laravel Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  web-deploy:
+    name: Deployed On Production Server at ${{ github.event.head_commit.timestamp }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: 🧰 Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2' # Sesuaikan PHP versi kamu
+
+    - name: 📦 Install composer dependencies
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+    # Optional: kalau mau compile frontend asset, misal pakai Laravel Mix
+    # - name: 📦 Install NPM dependencies
+    #   run: npm install && npm run prod
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp.arifhida.my.id
+        username: ${{ secrets.ftp_username }}
+        password: ${{ secrets.ftp_password }}
+        exclude: |
+          **/node_modules/**
+          **/vendor/**
+          **/.git/**
+          **/.github/**
