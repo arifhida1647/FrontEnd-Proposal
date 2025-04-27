@@ -5,7 +5,7 @@ on:
 
 jobs:
   web-deploy:
-    name: FrontEnd Deployed to Production Server
+    name: Front-End Deployed to Production Server
     runs-on: ubuntu-latest
     environment: production
 
@@ -46,4 +46,4 @@ jobs:
     - name: 📋 Finalize
       run: |
         echo "## 🎉 Deployment Selesai" >> $GITHUB_STEP_SUMMARY
-        echo "- Semua file sudah dikirim ke server FTP" >> $GITHUB_STEP_SUMMARY
+        echo "- Semua file sudah dikirim ke server FTP" >> $GITHUB_STEP_SUMMARY 
