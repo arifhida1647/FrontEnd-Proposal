@@ -85,12 +85,11 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         </div>
     </nav>
     <!-- Container full height -->
-    <section class="w-full h-screen flex items-center justify-center bg-gray-900">
-        <div id="video-container"
-            class="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl border-4 border-gray-700">
+    <section class="w-full h-screen bg-black flex items-center justify-center p-4">
+        <div class="w-full max-w-7xl aspect-video">
             <iframe id="cameraFrame" 
-                src="https://motorcycle-contest-expressed-techniques.trycloudflare.com/video_feed"
-                class="w-full h-full rounded-xl" 
+                src="https://actually-tobacco-suspect-runner.trycloudflare.com/video_feed"
+                class="w-full h-full rounded-xl shadow-xl"
                 allow="autoplay">
             </iframe>
         </div>

@@ -14,7 +14,7 @@ jobs:
     - name: 🧰 Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2' # Sesuaikan PHP versi kamu
+        php-version: '8.3' # Sesuaikan PHP versi kamu
 
     - name: 📦 Install composer dependencies
       run: composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -34,3 +34,4 @@ jobs:
           **/vendor/**
           **/.git/**
           **/.github/**
+          **/config/**
