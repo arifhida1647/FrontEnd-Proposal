@@ -13,31 +13,19 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
 
-    - name: 🧰 Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.3'
-
     - name: 📦 Install composer dependencies
       run: |
         composer install --no-interaction --prefer-dist --optimize-autoloader
         echo "## 📦 Composer Install" >> $GITHUB_STEP_SUMMARY
         echo "- Semua dependencies berhasil terinstall" >> $GITHUB_STEP_SUMMARY
 
-    - name: ⚙️ Set permissions
-      run: |
-        chmod -R 755 storage
-        chmod -R 755 bootstrap/cache
-        echo "## 🛡️ Set Permissions" >> $GITHUB_STEP_SUMMARY
-        echo "- Permissions untuk folder storage dan bootstrap/cache sudah diset" >> $GITHUB_STEP_SUMMARY
 
     - name: 🔧 Run Artisan Commands
       run: |
-        php artisan config:cache
         php artisan route:cache
         php artisan view:cache
         echo "## 🔧 Artisan Commands" >> $GITHUB_STEP_SUMMARY
-        echo "- Config, Route, dan View cache berhasil dibuat" >> $GITHUB_STEP_SUMMARY
+        echo "- Route, dan View cache berhasil dibuat" >> $GITHUB_STEP_SUMMARY
 
     - name: 📂 Sync files to server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
