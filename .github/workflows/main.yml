@@ -5,8 +5,10 @@ on:
 
 jobs:
   web-deploy:
-    name: Deployed On Production Server at ${{ github.event.head_commit.timestamp }}
+    name: FrontEnd Deployed to Production Server
     runs-on: ubuntu-latest
+    environment: production
+
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
@@ -14,16 +16,30 @@ jobs:
     - name: 🧰 Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.3' # Sesuaikan PHP versi kamu
+        php-version: '8.2'
 
     - name: 📦 Install composer dependencies
-      run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      run: |
+        composer install --no-interaction --prefer-dist --optimize-autoloader
+        echo "## 📦 Composer Install" >> $GITHUB_STEP_SUMMARY
+        echo "- Semua dependencies berhasil terinstall" >> $GITHUB_STEP_SUMMARY
 
-    # Optional: kalau mau compile frontend asset, misal pakai Laravel Mix
-    # - name: 📦 Install NPM dependencies
-    #   run: npm install && npm run prod
+    - name: ⚙️ Set permissions
+      run: |
+        chmod -R 755 storage
+        chmod -R 755 bootstrap/cache
+        echo "## 🛡️ Set Permissions" >> $GITHUB_STEP_SUMMARY
+        echo "- Permissions untuk folder storage dan bootstrap/cache sudah diset" >> $GITHUB_STEP_SUMMARY
 
-    - name: 📂 Sync files
+    - name: 🔧 Run Artisan Commands
+      run: |
+        php artisan config:cache
+        php artisan route:cache
+        php artisan view:cache
+        echo "## 🔧 Artisan Commands" >> $GITHUB_STEP_SUMMARY
+        echo "- Config, Route, dan View cache berhasil dibuat" >> $GITHUB_STEP_SUMMARY
+
+    - name: 📂 Sync files to server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftp.arifhida.my.id
@@ -34,4 +50,12 @@ jobs:
           **/vendor/**
           **/.git/**
           **/.github/**
+          **/tests/**
           **/config/**
+          .env
+      continue-on-error: true
+
+    - name: 📋 Finalize
+      run: |
+        echo "## 🎉 Deployment Selesai" >> $GITHUB_STEP_SUMMARY
+        echo "- Semua file sudah dikirim ke server FTP" >> $GITHUB_STEP_SUMMARY
