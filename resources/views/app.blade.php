@@ -150,12 +150,12 @@
         <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
 
-    <!-- <script>
+    <script>
         // Refresh the page every 2 seconds
         setInterval(function() {
             window.location.reload();
         }, 5000); // 2000 milliseconds = 2 seconds
-    </script> -->
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
