@@ -161,7 +161,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             new Typed("#typing-text", {
-                strings: ["Selamat Datang", "Sistem Monitoring Parkir UPNVJ"],
+                strings: ["Selamat Datang", "Sistem Monitoring"],
                 typeSpeed: 50, // Kecepatan mengetik (lebih kecil = lebih cepat)
                 backSpeed: 30, // Kecepatan menghapus
                 backDelay: 1500, // Waktu jeda sebelum menghapus
