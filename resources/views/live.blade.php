@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <title> Live Pages </title>
     <style>
         /* Style untuk popup */
         #popup {
@@ -68,7 +68,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="flex justify-between items-center px-6">
             <!-- Logo -->
             <div class="flex items-center space-x-3">
-                <img src="{{ asset('LOGO.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
+                <img src="{{ asset('LOGOV2.png') }}" alt="Logo" class="w-16 h-16 rounded-full">
             </div>
 
             <!-- Navigation Links -->

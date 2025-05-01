@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <title> Home Pages</title>
     <style>
         /* Style untuk popup */
         #popup {
@@ -68,7 +68,7 @@
         <div class="flex justify-between items-center px-6">
             <!-- Logo -->
             <div class="flex items-center space-x-3">
-                <img src="{{ asset('LOGO.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
+                <img src="{{ asset('LOGOV2.png') }}" alt="Logo" class="w-16 h-16 rounded-full">
             </div>
 
             <!-- Navigation Links -->
@@ -161,7 +161,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             new Typed("#typing-text", {
-                strings: ["Selamat Datang", "Sistem Monitoring Parkir UPNVJ"],
+                strings: ["Selamat Datang", "Sistem Monitoring Parkir"],
                 typeSpeed: 50, // Kecepatan mengetik (lebih kecil = lebih cepat)
                 backSpeed: 30, // Kecepatan menghapus
                 backDelay: 1500, // Waktu jeda sebelum menghapus
