@@ -113,24 +113,24 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
             lastScrollTop = scrollTop;
         });
 
-    //     // Cek apakah iframe berhasil dimuat
-    //     setTimeout(() => {
-    //         if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
-    //             videoContainer.innerHTML = `
-    //         <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
-    //             <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
-    //                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    //                 <path stroke-linecap="round" stroke-linejoin="round" 
-    //                     d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
-    //                 <path stroke-linecap="round" stroke-linejoin="round" 
-    //                     d="M15 9l-6 6m0-6l6 6"></path>
-    //             </svg>
-    //             <span>Kamera Tidak Terhubung</span>
-    //         </div>
-    //     `;
-    //         }
-    //     }, 5000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
-    // </script>
+        // Cek apakah iframe berhasil dimuat
+        setTimeout(() => {
+            if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
+                videoContainer.innerHTML = `
+            <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
+                <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M15 9l-6 6m0-6l6 6"></path>
+                </svg>
+                <span>Kamera Tidak Terhubung</span>
+            </div>
+        `;
+            }
+        }, 5000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
+    </script>
 
 </body>
 
