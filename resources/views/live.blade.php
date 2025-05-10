@@ -85,13 +85,23 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         </div>
     </nav>
     <!-- Container full height -->
-    <section class="w-full h-screen bg-black flex items-center justify-center p-4">
-        <div class="w-full max-w-7xl aspect-video">
-            <iframe id="cameraFrame" 
-                src="https://actually-tobacco-suspect-runner.trycloudflare.com/video_feed"
-                class="w-full h-full rounded-xl shadow-xl"
-                allow="autoplay">
+    <section id="video-container" class="w-full h-screen bg-black flex items-center justify-center p-4">
+        <div class="w-full max-w-7xl aspect-video relative">
+            <iframe id="cameraFrame" src="https://actually-tobacco-suspect-runner.trycloudflare.com/video_feed"
+                class="w-full h-full rounded-xl shadow-xl" allow="autoplay" onerror="showErrorMessage()"
+                onload="iframeLoaded = true;">
             </iframe>
+            <!-- Pesan error akan dimasukkan di sini jika iframe gagal -->
+            <div id="error-message"
+                class="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold text-center hidden bg-black bg-opacity-80">
+                <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 9l-6 6m0-6l6 6"></path>
+                </svg>
+                <span>Kamera Tidak Terhubung</span>
+            </div>
         </div>
     </section>
     <script>
@@ -113,23 +123,18 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
             lastScrollTop = scrollTop;
         });
 
-        // Cek apakah iframe berhasil dimuat
+        let iframeLoaded = false;
+
+        function showErrorMessage() {
+            document.getElementById('error-message').classList.remove('hidden');
+        }
+
+        // Fallback jika iframe tidak load dalam 5 detik
         setTimeout(() => {
-            if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
-                videoContainer.innerHTML = `
-            <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
-                <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        d="M15 9l-6 6m0-6l6 6"></path>
-                </svg>
-                <span>Kamera Tidak Terhubung</span>
-            </div>
-        `;
+            if (!iframeLoaded) {
+                showErrorMessage();
             }
-        }, 5000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
+        }, 5000);
     </script>
 
 </body>
