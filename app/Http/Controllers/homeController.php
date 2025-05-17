@@ -23,7 +23,15 @@ class homeController extends Controller
     
         return view('app', $data);
     }
-
+   public function apiStatistik()
+    {
+        return response()->json([
+            'total' => Komparasi::count(),
+            'tersedia' => Komparasi::whereIn('status', [0, 2, 6])->count(),
+            'kemungkinan' => Komparasi::whereIn('status', [1, 3])->count(),
+            'update' => now()->addHours(7)->toDateTimeString(),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

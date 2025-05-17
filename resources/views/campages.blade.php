@@ -95,7 +95,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
-                <div
+                <div id="slot-{{ $item->id }}"
                     class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
@@ -109,7 +109,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
-                <div
+                <div id="slot-{{ $item->id }}"
                     class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
@@ -123,7 +123,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
-                <div
+                <div id="slot-{{ $item->id }}"
                     class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
@@ -135,11 +135,45 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
 
 
     <script>
-        // Refresh the page every 2 seconds
-        setInterval(function() {
-            window.location.reload();
-        }, 5000); // 2000 milliseconds = 2 seconds
+        function fetchCamData() {
+            fetch('/api/cam-data')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const element = document.getElementById(`slot-${item.id}`);
+                        if (!element) return;
+
+                        // Update warna background dan teks
+                        let bgColor = '';
+                        let text = '';
+
+                        if (item.status === 0) {
+                            bgColor = 'bg-green-400';
+                            text = item.slot;
+                        } else if (item.status === 1) {
+                            bgColor = 'bg-red-400';
+                            text = item.slot;
+                        } else {
+                            bgColor = 'bg-gray-400';
+                            text = 'Sensor Not Connect';
+                        }
+
+                        // Remove all bg-* classes
+                        element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400');
+                        element.classList.add(bgColor);
+                        element.textContent = text;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Jalankan saat page load
+        fetchCamData();
+
+        // Jalankan tiap 5 detik
+        setInterval(fetchCamData, 5000);
     </script>
+
     <script>
         let lastScrollTop = 0;
         const navbar = document.getElementById("navbar");
@@ -159,24 +193,6 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
             lastScrollTop = scrollTop;
         });
 
-        // Cek apakah iframe berhasil dimuat
-        setTimeout(() => {
-            if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
-                videoContainer.innerHTML = `
-            <div class="flex items-center justify-center text-white text-4xl font-bold text-center">
-                <svg class="w-10 h-10 text-red-500 mr-3" fill="none" stroke="currentColor" stroke-width="2" 
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        d="M18.364 18.364a9 9 0 11-12.728-12.728 9 9 0 0112.728 12.728z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        d="M15 9l-6 6m0-6l6 6"></path>
-                </svg>
-                <span>Kamera Tidak Terhubung</span>
-            </div>
-        `;
-            }
-        }, 2000); // Jika dalam 2 detik iframe tidak dimuat, tampilkan pesan
-    </script>
 
 </body>
 

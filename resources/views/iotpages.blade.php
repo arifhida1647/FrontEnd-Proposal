@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title> IOT Pages </title>
     <style>
-
         .shadow-white {
             box-shadow: 0 20px 25px rgba(255, 255, 255, 0.5);
         }
@@ -43,46 +42,84 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($iot->take(4) as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $bgColor =
+                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
-                <div class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
             @endforeach
         </div>
-        
+
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($iot->slice(4, 8) as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $bgColor =
+                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
-                <div class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
             @endforeach
         </div>
-        
+
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($iot->slice(12, 8) as $item)
                 @php
-                    $bgColor = $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
+                    $bgColor =
+                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
-                <div class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
             @endforeach
-        </div>        
+        </div>
         <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
-
     <script>
-        // Refresh the page every 2 seconds
-        setInterval(function() {
-            window.location.reload();
-        }, 5000); // 2000 milliseconds = 2 seconds
+        function fetchIotData() {
+            fetch('/api/iot-data')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        const element = document.getElementById(`slot-${item.id}`);
+                        if (!element) return;
+
+                        // Update warna background dan teks
+                        let bgColor = '';
+                        let text = '';
+
+                        if (item.status === 0) {
+                            bgColor = 'bg-green-400';
+                            text = item.slot;
+                        } else if (item.status === 1) {
+                            bgColor = 'bg-red-400';
+                            text = item.slot;
+                        } else {
+                            bgColor = 'bg-gray-400';
+                            text = 'Sensor Not Connect';
+                        }
+
+                        // Remove all bg-* classes
+                        element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400');
+                        element.classList.add(bgColor);
+                        element.textContent = text;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Jalankan saat page load
+        fetchIotData();
+
+        // Jalankan tiap 5 detik
+        setInterval(fetchIotData, 5000);
     </script>
 
 </body>
