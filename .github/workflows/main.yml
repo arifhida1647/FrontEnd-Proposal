@@ -27,7 +27,6 @@ jobs:
         php artisan view:clear
         php artisan config:clear
         php artisan route:clear
-        php artisan cache:clear
         echo "## 🔧 Artisan Commands" >> $GITHUB_STEP_SUMMARY
         echo "- Route, dan View cache berhasil dibuat" >> $GITHUB_STEP_SUMMARY
 
