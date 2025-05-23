@@ -91,10 +91,12 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($cam->take(4) as $item)
                 @php
+                    $bgColor =
+                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
             @endforeach
@@ -108,7 +110,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
             @endforeach
@@ -122,7 +124,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
                     {{ $text }}
                 </div>
             @endforeach
@@ -141,11 +143,9 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         const element = document.getElementById(`slot-${item.id}`);
                         if (!element) return;
 
-                        // Default
                         let bgColor = '';
                         let text = '';
 
-                        // Set status
                         if (item.status === 0) {
                             bgColor = 'bg-green-400';
                             text = item.slot;
@@ -157,15 +157,9 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                             text = 'Cam Not Connect';
                         }
 
-                        // Bersihkan class lama
+                        // remove dulu class lama, lalu tambah class baru
                         element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400');
-
-                        // Tambahkan class baru jika ada
-                        if (bgColor) {
-                            element.classList.add(bgColor);
-                        }
-
-                        // Update teks
+                        element.classList.add(bgColor);
                         element.textContent = text;
                     });
                 })
