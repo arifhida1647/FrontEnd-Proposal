@@ -153,9 +153,9 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         } else if (item.status === 1) {
                             bgColor = 'bg-red-400';
                             text = item.slot;
-                        } else {
+                        } else if (item.status === 2) {
                             bgColor = 'bg-gray-400';
-                            text = 'Sensor Not Connect';
+                            text = 'Cam Not Connect';
                         }
 
                         // Remove all bg-* classes
