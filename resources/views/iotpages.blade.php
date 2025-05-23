@@ -39,51 +39,45 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
     <section class="container mb-8 px-4 mt-36 mx-auto">
         <h2 class="text-4xl font-bold mb-10 text-center text-white">IOT Sensor</h2>
         <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
-        <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+         <!-- Batch 1 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
             @foreach ($iot->take(4) as $item)
-                @php
-                    $bgColor =
-                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
-                    $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
-                @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $text }}
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Sensor Not Connect' : ''}}</div>
+                    <!-- Akan diganti item.deskripsi -->
                 </div>
             @endforeach
         </div>
 
-        <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+        <!-- Batch 2 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
             @foreach ($iot->slice(4, 8) as $item)
-                @php
-                    $bgColor =
-                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
-                    $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
-                @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $text }}
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Sensor Not Connect' : ''}}</div>
+                    <!-- Akan diganti item.deskripsi -->
                 </div>
             @endforeach
         </div>
 
-        <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
+        <!-- Batch 3 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
             @foreach ($iot->slice(12, 8) as $item)
-                @php
-                    $bgColor =
-                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
-                    $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
-                @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
-                    {{ $text }}
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Sensor Not Connect' : ''}}</div>
+                    <!-- Akan diganti item.deskripsi -->
                 </div>
             @endforeach
         </div>
         <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
     <script>
-        function fetchIotData() {
+        function fetchKomparasiData() {
             fetch('/api/iot-data')
                 .then(response => response.json())
                 .then(data => {
@@ -91,35 +85,32 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         const element = document.getElementById(`slot-${item.id}`);
                         if (!element) return;
 
-                        // Update warna background dan teks
-                        let bgColor = '';
-                        let text = '';
+                        // Hapus semua warna background yang mungkin sebelumnya
+                        element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400', 'bg-yellow-400');
 
-                        if (item.status === 0) {
-                            bgColor = 'bg-green-400';
-                            text = item.slot;
-                        } else if (item.status === 1) {
-                            bgColor = 'bg-red-400';
-                            text = item.slot;
-                        } else if(item.status === 2){
-                            bgColor = 'bg-gray-400';
-                            text = 'Sensor Not Connect';
+                        // Tambahkan warna berdasarkan status
+                        if (item.status == 0) {
+                            element.classList.add('bg-green-400');
+                        } else if (item.status == 1) {
+                            element.classList.add('bg-red-400');
+                        } else if (item.status == 2) {
+                            element.classList.add('bg-gray-400');
+                        } else {
+                            element.classList.add('bg-yellow-400'); // fallback kalau status tak dikenal
                         }
 
-                        // Remove all bg-* classes
-                        element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400');
-                        element.classList.add(bgColor);
-                        element.textContent = text;
+                        // Update isi slot dan deskripsi
+                        element.children[0].textContent = item.slot;
                     });
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(console.error);
         }
 
-        // Jalankan saat page load
-        fetchIotData();
+        // Jalankan sekali saat halaman pertama kali load
+        fetchKomparasiData();
 
-        // Jalankan tiap 5 detik
-        setInterval(fetchIotData, 5000);
+        // Jalankan setiap 5 detik
+        setInterval(fetchKomparasiData, 5000);
     </script>
 
 </body>
