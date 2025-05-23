@@ -92,8 +92,8 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         if (!element) return;
 
                         // Update warna background dan teks
-                        let bgColor = 'bg-gray-400'; // default
-                        let text = item.slot;
+                        let bgColor = '';
+                        let text = '';
 
                         if (item.status === 0) {
                             bgColor = 'bg-green-400';
@@ -101,7 +101,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         } else if (item.status === 1) {
                             bgColor = 'bg-red-400';
                             text = item.slot;
-                        } else if (item.status === 2) {
+                        } else if(item.status === 2){
                             bgColor = 'bg-gray-400';
                             text = 'Sensor Not Connect';
                         }
