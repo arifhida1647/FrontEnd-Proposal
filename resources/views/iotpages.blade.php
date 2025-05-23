@@ -47,7 +47,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold ">
                     {{ $text }}
                 </div>
             @endforeach
@@ -61,7 +61,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold ">
                     {{ $text }}
                 </div>
             @endforeach
@@ -75,7 +75,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Sensor Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold ">
                     {{ $text }}
                 </div>
             @endforeach

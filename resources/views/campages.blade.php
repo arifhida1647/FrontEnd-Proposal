@@ -91,12 +91,10 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mb-10">
             @foreach ($cam->take(4) as $item)
                 @php
-                    $bgColor =
-                        $item->status == 0 ? 'bg-green-400' : ($item->status == 1 ? 'bg-red-400' : 'bg-gray-400');
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold">
                     {{ $text }}
                 </div>
             @endforeach
@@ -110,7 +108,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold">
                     {{ $text }}
                 </div>
             @endforeach
@@ -124,7 +122,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                     $text = $item->status == 2 ? 'Cam Not Connect' : $item->slot;
                 @endphp
                 <div id="slot-{{ $item->id }}"
-                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold {{ $bgColor }}">
+                    class="h-32 rounded-lg flex items-center justify-center text-white text-xl font-bold">
                     {{ $text }}
                 </div>
             @endforeach
