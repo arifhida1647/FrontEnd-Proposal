@@ -143,8 +143,8 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         const element = document.getElementById(`slot-${item.id}`);
                         if (!element) return;
 
-                        let bgColor = '';
-                        let text = '';
+                        let bgColor = 'bg-gray-400'; // default
+                        let text = item.slot;
 
                         if (item.status === 0) {
                             bgColor = 'bg-green-400';
