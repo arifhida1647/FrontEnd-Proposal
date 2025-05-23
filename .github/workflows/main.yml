@@ -22,6 +22,9 @@ jobs:
 
     - name: 🔧 Run Artisan Commands
       run: |
+        php artisan route:cache
+        php artisan view:cache
+        php artisan optimize:clear
         echo "## 🔧 Artisan Commands" >> $GITHUB_STEP_SUMMARY
         echo "- Route, dan View cache berhasil dibuat" >> $GITHUB_STEP_SUMMARY
 
