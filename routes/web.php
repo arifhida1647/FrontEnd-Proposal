@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [homeController::class, 'index']);
 Route::get('/iot', [iotController::class, 'index']);
 Route::get('/cam', [camController::class, 'index']);
-Route::get('/video', [videoController::class, 'index']);
-Route::get('/live', function () {
-    return view('live');
-});
+Route::get('/live', [videoController::class, 'index']);
+// Route::get('/live', function () {
+//     return view('live');
+// });
 // routes/web.php
 Route::get('/api/iot-data', function () {
     $iot = \App\Models\Iot::all(); // sesuaikan model kamu
@@ -25,4 +25,5 @@ Route::get('/api/komparasi-data', function () {
     $komparasi = \App\Models\Komparasi::all(); // sesuaikan model kamu
     return response()->json($komparasi);
 });
+
 Route::get('/api/statistik-parkir', [homeController::class, 'apiStatistik']);
