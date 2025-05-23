@@ -11,7 +11,6 @@ class camController extends Controller
     {
         // Ambil data dari model Cam dan Iot
         $data['cam'] = Cam::orderBy('id', 'asc')->get();
-        $data['images'] = Image::orderBy('id', 'desc')->first();
 
         // Kirim data ke view
         return view('campages', $data);
