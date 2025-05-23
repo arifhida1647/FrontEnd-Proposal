@@ -143,7 +143,6 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         const element = document.getElementById(`slot-${item.id}`);
                         if (!element) return;
 
-                        // Update warna background dan teks
                         let bgColor = '';
                         let text = '';
 
@@ -158,7 +157,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                             text = 'Cam Not Connect';
                         }
 
-                        // Remove all bg-* classes
+                        // remove dulu class lama, lalu tambah class baru
                         element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400');
                         element.classList.add(bgColor);
                         element.textContent = text;
@@ -194,6 +193,8 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         });
 
 
-</body>
+        <
+        /body>
 
-</html>
+        <
+        /html>
