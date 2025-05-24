@@ -15,4 +15,12 @@ class iotController extends Controller
         // Kirim data ke view
         return view('iotpages', $data);
     }
+    public function apiStatistik()
+    {
+        return response()->json([
+            'total' => Iot::count(),
+            'tersedia' => Iot::whereIn('status', [0])->count(),
+            'update' => now()->addHours(7)->toDateTimeString(),
+        ]);
+    }
 }
