@@ -62,8 +62,7 @@
 </head>
 
 <body class="bg-gray-800">
-    <nav
-        class="fixed top-3 left-1/2 transform -translate-x-1/2 p-3 rounded-full z-50 w-full max-w-lg 
+    <nav class="fixed top-3 left-1/2 transform -translate-x-1/2 p-3 rounded-full z-50 w-full max-w-lg 
 bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="flex justify-between items-center px-6">
             <!-- Logo -->
@@ -105,36 +104,26 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         </div>
     </section>
     <script>
-        let lastScrollTop = 0;
-        const navbar = document.getElementById("navbar");
-        const iframe = document.getElementById("cameraFrame");
-        const videoContainer = document.getElementById("video-container");
-
-        // Event untuk sembunyikan navbar saat scroll ke bawah
-        window.addEventListener("scroll", function() {
-            let scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop) {
-                navbar.style.transform = "translateY(-100px)";
-            } else {
-                navbar.style.transform = "translateY(0)";
-            }
-
-            lastScrollTop = scrollTop;
-        });
-
-        let iframeLoaded = false;
-
         function showErrorMessage() {
             document.getElementById('error-message').classList.remove('hidden');
         }
 
-        // Fallback jika iframe tidak load dalam 5 detik
-        setTimeout(() => {
-            if (!iframeLoaded) {
+        function hideErrorMessage() {
+            document.getElementById('error-message').classList.add('hidden');
+        }
+
+        // Set event listener manual, lebih aman daripada inline
+        window.addEventListener('DOMContentLoaded', () => {
+            const iframe = document.getElementById('cameraFrame');
+
+            iframe.onload = function () {
+                hideErrorMessage();
+            }
+
+            iframe.onerror = function () {
                 showErrorMessage();
             }
-        }, 5000);
+        });
     </script>
 
 </body>
