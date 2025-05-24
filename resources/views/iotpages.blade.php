@@ -14,8 +14,7 @@
 </head>
 
 <body class="bg-gray-800">
-    <nav
-        class="fixed top-3 left-1/2 transform -translate-x-1/2 p-3 rounded-full z-50 w-full max-w-lg 
+    <nav class="fixed top-3 left-1/2 transform -translate-x-1/2 p-3 rounded-full z-50 w-full max-w-lg 
 bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         <div class="flex justify-between items-center px-6">
             <!-- Logo -->
@@ -122,6 +121,10 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
 
                         // Update isi slot dan deskripsi
                         element.children[0].textContent = item.slot;
+                        // Tambahkan baris berikut untuk update pesan "Sensor Not Connect"
+                        if (element.children[1]) {
+                            element.children[1].textContent = item.status == 2 ? 'Sensor Not Connect' : '';
+                        }
                     });
                 })
                 .catch(console.error);
