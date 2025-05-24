@@ -28,3 +28,4 @@ Route::get('/api/komparasi-data', function () {
 
 Route::get('/api/statistik-parkir', [homeController::class, 'apiStatistik']);
 Route::get('/api/statistik-iot', [iotController::class, 'apiStatistik']);
+Route::get('/api/statistik-cam', [camController::class, 'apiStatistik']);

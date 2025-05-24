@@ -15,5 +15,12 @@ class camController extends Controller
         // Kirim data ke view
         return view('campages', $data);
     }
-
+    public function apiStatistik()
+    {
+        return response()->json([
+            'total' => Cam::count(),
+            'tersedia' => Cam::whereIn('status', [0])->count(),
+            'update' => now()->addHours(7)->toDateTimeString(),
+        ]);
+    }
 }

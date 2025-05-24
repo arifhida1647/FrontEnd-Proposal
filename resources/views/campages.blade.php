@@ -86,6 +86,23 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
     </nav>
     <section class="container mb-8 px-4 mt-36 mx-auto">
         <h2 class="text-4xl font-bold mb-10 text-center text-white">Camera Sensor</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-white justify-center items-center">
+            <div
+                class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center flex flex-col items-center">
+                <h2 class="text-xl font-bold">Total Parkir</h2>
+                <p id="total-parkir" class="text-4xl mt-4"></p>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center flex flex-col items-center">
+                <h2 class="text-xl font-bold">Ketersediaan Parkir</h2>
+                <p id="tersedia-parkir" class="text-4xl mt-4 text-green-400"></p>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-600 border-4 border-sky-500 shadow-md rounded-lg p-6 text-center flex flex-col items-center">
+                <h2 class="text-xl font-bold">Update Time</h2>
+                <p id="update-time" class="text-2xl mt-4"></p>
+            </div>
+        </div>
         <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
 
         <!-- Batch 1 -->
@@ -94,7 +111,7 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                 <div id="slot-{{ $item->id }}"
                     class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
                     <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
-                    <div>{{ $item->status == 2 ? 'Cam Not Connect' :''}}</div>
+                    <div>{{ $item->status == 2 ? 'Cam Not Connect' : '' }}</div>
                     <!-- Akan diganti item.deskripsi -->
                 </div>
             @endforeach
@@ -164,7 +181,21 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         // Jalankan setiap 5 detik
         setInterval(fetchKomparasiData, 5000);
     </script>
+    <script>
+        function fetchStatistikParkir() {
+            fetch('/api/statistik-cam')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('total-parkir').textContent = data.total;
+                    document.getElementById('tersedia-parkir').textContent = data.tersedia;
+                    document.getElementById('update-time').textContent = data.update;
+                })
+                .catch(console.error);
+        }
 
+        fetchStatistikParkir();
+        setInterval(fetchStatistikParkir, 5000);
+    </script>
     <script>
         let lastScrollTop = 0;
         const navbar = document.getElementById("navbar");
