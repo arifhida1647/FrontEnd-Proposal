@@ -10,6 +10,12 @@
         .shadow-white {
             box-shadow: 0 20px 25px rgba(255, 255, 255, 0.5);
         }
+
+        .parallelogram {
+            transform: skewX(-15deg);
+            background-color: #4b5563;
+            /* Tailwind bg-gray-700 default */
+        }
     </style>
 </head>
 
@@ -93,15 +99,22 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         </div>
                     @endif
 
-                    <div class="grid grid-cols-4 gap-4">
+                    <div class="grid grid-cols-4 gap-4 ml-5">
                         @foreach ($iot->slice($i, 4) as $item)
                             <div id="slot-{{ $item->id }}"
-                                class="h-40 rounded-xl overflow-hidden transition-all duration-500 flex items-center justify-center text-white text-lg font-semibold text-center relative">
+                                class="h-44 overflow-hidden transition-all duration-500 flex items-center justify-center text-white text-lg font-semibold text-center relative
+                {{ $i === 0 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
+                {{ $i === 4 ? 'border-b-8 border-l-8 border-r-8 border-white' : '' }}
+                {{ $i === 8 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
+                {{ $i === 12 ? 'border-b-8 border-l-8 border-r-8 border-white' : '' }}
+                {{ $i === 16 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
+                {{ $i === 16 ? 'parallelogram' : '' }}">
                                 <!-- Konten akan diisi lewat JS -->
                             </div>
                         @endforeach
                     </div>
                 @endfor
+
 
                 <!-- Jalan horizontal akhir -->
                 <div class="row-span-full flex flex-col items-center justify-center mb-4">
