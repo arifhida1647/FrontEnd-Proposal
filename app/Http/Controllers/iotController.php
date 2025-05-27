@@ -15,6 +15,14 @@ class iotController extends Controller
         // Kirim data ke view
         return view('iotpages', $data);
     }
+    public function iot2()
+    {
+        // Ambil data dari model Cam dan Iot
+        $data['iot'] = Iot::orderBy('id', 'asc')->get();
+
+        // Kirim data ke view
+        return view('iotpages2', $data);
+    }
     public function apiStatistik()
     {
         return response()->json([

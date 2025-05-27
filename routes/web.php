@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index']);
 Route::get('/iot', [iotController::class, 'index']);
+Route::get('/iot2', [iotController::class, 'iot2']);
 Route::get('/cam', [camController::class, 'index']);
 Route::get('/live', [videoController::class, 'index']);
 // Route::get('/live', function () {
