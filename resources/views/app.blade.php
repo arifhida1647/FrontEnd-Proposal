@@ -55,6 +55,11 @@
         .shadow-white {
             box-shadow: 0 20px 25px rgba(255, 255, 255, 0.5);
         }
+        .parallelogram {
+            transform: skewX(-15deg);
+            background-color: #4b5563;
+            /* Tailwind bg-gray-700 default */
+        }
     </style>
 </head>
 
