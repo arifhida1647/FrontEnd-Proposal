@@ -103,77 +103,47 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                 <p id="update-time" class="text-2xl mt-4"></p>
             </div>
         </div>
+        <h2 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h2>
 
         <!-- Batch 1 -->
-        <div class="grid grid-cols-6 gap-4 mt-8">
-            <!-- Jalan vertikal -->
-            <div class="row-span-full flex flex-col items-center justify-center">
-                <div class="w-full h-full bg-gray-700 rounded-xl relative">
-                    <div
-                        class="absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-1 
-                [background:repeating-linear-gradient(white_0,white_10px,transparent_10px,transparent_20px)]">
-                    </div>
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            @foreach ($cam->take(4) as $item)
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Cam Not Connect' : '' }}</div>
+                    <!-- Akan diganti item.deskripsi -->
                 </div>
-            </div>
-
-            <!-- Slot parkir -->
-            <div class="col-span-5 space-y-2">
-                <!-- Gedung Atas -->
-                <div class="grid grid-cols-4 gap-4">
-                    <div
-                        class="col-span-4 h-60 rounded-xl bg-gray-500 flex items-center justify-center text-white text-lg font-semibold">
-                        Gedung Fakultas Kedokteran
-                    </div>
-                </div>
-
-                @for ($i = 0; $i < 20; $i += 4)
-                    @if ($i == 4 || $i == 12)
-                        <!-- Jalan horizontal -->
-                        <div class="row-span-full flex flex-col items-center justify-center mb-4">
-                            <div class="w-full h-20 bg-gray-700 rounded-xl relative">
-                                <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-1"
-                                    style="background: repeating-linear-gradient(to right, white 0, white 10px, transparent 10px, transparent 20px);">
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <div class="grid grid-cols-4 gap-4 ml-5">
-                        @foreach ($cam->slice($i, 4) as $item)
-                            <div id="slot-{{ $item->id }}"
-                                class="h-44 overflow-hidden transition-all duration-500 flex items-center justify-center text-white text-lg font-semibold text-center relative
-                {{ $i === 0 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
-                {{ $i === 4 ? 'border-b-8 border-l-8 border-r-8 border-white' : '' }}
-                {{ $i === 8 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
-                {{ $i === 12 ? 'border-b-8 border-l-8 border-r-8 border-white' : '' }}
-                {{ $i === 16 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
-                {{ $i === 16 ? 'parallelogram' : '' }}">
-                                <!-- Konten akan diisi lewat JS -->
-                            </div>
-                        @endforeach
-                    </div>
-                @endfor
-
-
-                <!-- Jalan horizontal akhir -->
-                <div class="row-span-full flex flex-col items-center justify-center mb-4">
-                    <div class="w-full h-20 bg-gray-700 rounded-xl relative">
-                        <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-1"
-                            style="background: repeating-linear-gradient(to right, white 0, white 10px, transparent 10px, transparent 20px);">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gedung Bawah -->
-                <div class="grid grid-cols-4 gap-4">
-                    <div
-                        class="col-span-4 h-60 rounded-xl bg-gray-500 flex items-center justify-center text-white text-lg font-semibold">
-                        Gedung Fakultas Hukum
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
+
+        <!-- Batch 2 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            @foreach ($cam->slice(4, 8) as $item)
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Cam Not Connect' : '' }}</div>
+                    <!-- Akan diganti item.deskripsi -->
+                </div>
+            @endforeach
+        </div>
+
+        <!-- Batch 3 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            @foreach ($cam->slice(12, 8) as $item)
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Cam Not Connect' : '' }}</div>
+                    <!-- Akan diganti item.deskripsi -->
+                </div>
+            @endforeach
+        </div>
+
+        <h2 class="text-2xl font-bold my-10 text-center text-white">Gedung Fakultas Hukum</h2>
     </section>
+
 
     <script>
         function fetchKomparasiData() {
@@ -184,10 +154,10 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         const element = document.getElementById(`slot-${item.id}`);
                         if (!element) return;
 
-                        // Reset class warna
+                        // Hapus semua warna background yang mungkin sebelumnya
                         element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400', 'bg-yellow-400');
 
-                        // Set warna berdasarkan status
+                        // Tambahkan warna berdasarkan status
                         if (item.status == 0) {
                             element.classList.add('bg-green-400');
                         } else if (item.status == 1) {
@@ -195,52 +165,24 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
                         } else if (item.status == 2) {
                             element.classList.add('bg-gray-400');
                         } else {
-                            element.classList.add('bg-yellow-400');
+                            element.classList.add('bg-yellow-400'); // fallback kalau status tak dikenal
                         }
 
-                        // Tambahkan label slot
-                        element.innerHTML = `
-                        <div class="absolute top-1 left-1 bg-black bg-opacity-50 text-white text-sm px-2 py-1 rounded">
-                            ${item.slot}
-                        </div>
-                    `;
-
-                        // Tambahkan konten berdasarkan status
-                        if (item.status == 1) {
-                            // Terisi
-                            element.innerHTML += `
-                            <div class="flex items-center justify-center h-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 13l2-5h14l2 5v6a1 1 0 01-1 1h-1a2 2 0 01-4 0H8a2 2 0 01-4 0H3a1 1 0 01-1-1v-6z" />
-                                </svg>
-                            </div>
-                        `;
-                        } else if (item.status == 0) {
-                            // Kosong
-                            element.innerHTML += `
-                            <div class="flex items-center justify-center h-full text-white text-lg font-semibold">
-                                Available
-                            </div>
-                        `;
-                        } else if (item.status == 2) {
-                            // Sensor Error
-                            element.innerHTML += `
-                            <div class="absolute bottom-1 left-1 right-1 text-center text-xs text-white bg-gray-700 bg-opacity-70 px-2 py-1 rounded">
-                                Cam Not Connect
-                            </div>
-                        `;
+                        // Update isi slot dan deskripsi
+                        element.children[0].textContent = item.slot;
+                          // Tambahkan baris berikut untuk update pesan "Cam Not Connect"
+                        if (element.children[1]) {
+                            element.children[1].textContent = item.status == 2 ? 'Cam Not Connect' : '';
                         }
                     });
                 })
                 .catch(console.error);
         }
 
-        // Panggil saat halaman dimuat
+        // Jalankan sekali saat halaman pertama kali load
         fetchKomparasiData();
 
-        // Update tiap 5 detik
+        // Jalankan setiap 5 detik
         setInterval(fetchKomparasiData, 5000);
     </script>
     <script>

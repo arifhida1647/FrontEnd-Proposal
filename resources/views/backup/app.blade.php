@@ -109,79 +109,45 @@
     <!-- Komparasi Parkir -->
     <section class="container mb-8 px-4 mx-auto">
         <h2 class="text-4xl font-bold mb-10 text-center text-white">Komparasi Parkir</h2>
+        <h3 class="text-2xl font-bold mb-10 text-center text-white">Gedung Fakultas Kedokteran</h3>
 
-        <div class="grid grid-cols-6 gap-4 mt-8">
-            <!-- Jalan vertikal -->
-            <div class="row-span-full flex flex-col items-center justify-center">
-                <div class="w-full h-full bg-gray-700 rounded-xl relative">
-                    <div
-                        class="absolute top-0 left-1/2 transform -translate-x-1/2 h-full w-1 
-                [background:repeating-linear-gradient(white_0,white_10px,transparent_10px,transparent_20px)]">
-                    </div>
+        <!-- Batch 1 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            @foreach ($combinedData->take(4) as $item)
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Sensor Not Connect' : $item->deskripsi }}</div>
+                    <!-- Akan diganti item.deskripsi -->
                 </div>
-            </div>
-
-            <!-- Slot parkir -->
-            <div class="col-span-5 space-y-2">
-                <!-- Gedung Atas -->
-                <div class="grid grid-cols-4 gap-4">
-                    <div
-                        class="col-span-4 h-60 rounded-xl bg-gray-500 flex items-center justify-center text-white text-lg font-semibold">
-                        Gedung Fakultas Kedokteran
-                    </div>
-                </div>
-
-                @for ($i = 0; $i < 20; $i += 4)
-                    @if ($i == 4 || $i == 12)
-                        <!-- Jalan horizontal -->
-                        <div class="row-span-full flex flex-col items-center justify-center mb-4">
-                            <div class="w-full h-20 bg-gray-700 rounded-xl relative">
-                                <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-1"
-                                    style="background: repeating-linear-gradient(to right, white 0, white 10px, transparent 10px, transparent 20px);">
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <div class="grid grid-cols-4 gap-4 ml-5">
-                        @foreach ($combinedData->slice($i, 4) as $item)
-                            <div id="slot-{{ $item->id }}"
-                                class="h-44 overflow-hidden transition-all duration-500 flex flex-col items-center justify-center text-white text-lg font-semibold text-center relative
-        {{ $i === 0 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
-        {{ $i === 4 ? 'border-b-8 border-l-8 border-r-8 border-white' : '' }}
-        {{ $i === 8 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
-        {{ $i === 12 ? 'border-b-8 border-l-8 border-r-8 border-white' : '' }}
-        {{ $i === 16 ? 'border-t-8 border-l-8 border-r-8 border-white' : '' }}
-        {{ $i === 16 ? 'parallelogram' : '' }}">
-
-                                <!-- Konten akan diisi lewat JS -->
-                                <div class="slot-label"></div>
-                                <div class="slot-description text-sm"></div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endfor
-
-
-                <!-- Jalan horizontal akhir -->
-                <div class="row-span-full flex flex-col items-center justify-center mb-4">
-                    <div class="w-full h-20 bg-gray-700 rounded-xl relative">
-                        <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-1"
-                            style="background: repeating-linear-gradient(to right, white 0, white 10px, transparent 10px, transparent 20px);">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gedung Bawah -->
-                <div class="grid grid-cols-4 gap-4">
-                    <div
-                        class="col-span-4 h-60 rounded-xl bg-gray-500 flex items-center justify-center text-white text-lg font-semibold">
-                        Gedung Fakultas Hukum
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
+        <!-- Batch 2 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            @foreach ($combinedData->slice(4, 8) as $item)
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Sensor Not Connect' : $item->deskripsi }}</div>
+                    <!-- Akan diganti item.deskripsi -->
+                </div>
+            @endforeach
+        </div>
+
+        <!-- Batch 3 -->
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            @foreach ($combinedData->slice(12, 8) as $item)
+                <div id="slot-{{ $item->id }}"
+                    class="h-32 rounded-lg flex flex-col items-center justify-center text-white text-xl font-bold text-center transition-all duration-500 {{ $item['warna'] }}">
+                    <div>{{ $item->slot }}</div> <!-- Akan diganti item.slot -->
+                    <div>{{ $item->status == 2 ? 'Sensor Not Connect' : $item->deskripsi }}</div>
+                    <!-- Akan diganti item.deskripsi -->
+                </div>
+            @endforeach
+        </div>
+
+        <h3 class="text-2xl font-bold mt-10 text-center text-white">Gedung Fakultas Hukum</h3>
     </section>
 
     <!-- Script Update Data -->
@@ -195,16 +161,14 @@
                         if (!element) return;
 
                         // Hapus semua warna background yang mungkin sebelumnya
-                        element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400', 'bg-yellow-400');
+                        element.classList.remove('bg-green-400', 'bg-red-400', 'bg-gray-400','bg-yellow-400');
 
                         // Tambahkan warna baru dari database
                         element.classList.add(item.warna);
 
                         // Update isi slot dan deskripsi
-                        const label = element.querySelector('.slot-label');
-                        const desc = element.querySelector('.slot-description');
-                        if (label) label.textContent = item.slot || '';
-                        if (desc) desc.textContent = item.deskripsi || '';
+                        element.children[0].textContent = item.slot;
+                        element.children[1].textContent = item.deskripsi;
                     });
                 })
                 .catch(console.error);
@@ -216,23 +180,22 @@
         // Jalankan setiap 5 detik
         setInterval(fetchKomparasiData, 5000);
     </script>
+<script>
+    function fetchStatistikParkir() {
+        fetch('/api/statistik-parkir')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-parkir').textContent = data.total;
+                document.getElementById('tersedia-parkir').textContent = data.tersedia;
+                document.getElementById('kemungkinan-parkir').textContent = data.kemungkinan;
+                document.getElementById('update-time').textContent = data.update;
+            })
+            .catch(console.error);
+    }
 
-    <script>
-        function fetchStatistikParkir() {
-            fetch('/api/statistik-parkir')
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('total-parkir').textContent = data.total;
-                    document.getElementById('tersedia-parkir').textContent = data.tersedia;
-                    document.getElementById('kemungkinan-parkir').textContent = data.kemungkinan;
-                    document.getElementById('update-time').textContent = data.update;
-                })
-                .catch(console.error);
-        }
-
-        fetchStatistikParkir();
-        setInterval(fetchStatistikParkir, 5000);
-    </script>
+    fetchStatistikParkir();
+    setInterval(fetchStatistikParkir, 5000);
+</script>
 
 
     <!-- Typed.js -->
