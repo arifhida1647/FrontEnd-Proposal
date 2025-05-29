@@ -58,6 +58,7 @@
         .shadow-white {
             box-shadow: 0 20px 25px rgba(255, 255, 255, 0.5);
         }
+
         .parallelogram {
             transform: skewX(-15deg);
             background-color: #4b5563;
@@ -110,7 +111,40 @@ bg-gray-900 bg-opacity-90 shadow-lg backdrop-blur-md border border-gray-700">
         </div>
 
         <!-- Batch 1 -->
-        <div class="grid grid-cols-6 gap-4 mt-8">
+        <div class="grid md:grid-cols-7 grid-cols-6 gap-2 mt-8">
+            <!-- Gedung Samping jalan (7 baris full tinggi) -->
+            <div class="hidden lg:grid row-span-full grid-rows-7 gap-2 w-full items-stretch text-white">
+                @for ($j = 0; $j < 7; $j++)
+                    @php
+                        if ($j == 1) {
+                            $rowSpanClass = 'row-span-3';
+                            $content = 'Lapangan';
+                        } elseif ($j == 4) {
+                            $rowSpanClass = 'row-span-2';
+                            $content = 'Masjid Jami Manbaul Ulum';
+                        } elseif ($j == 6) {
+                            $rowSpanClass = 'row-span-1';
+                            $content = 'Gedung Fakultas Ilmu Komputer';
+                        } elseif (in_array($j, [2, 3, 5])) {
+                            $rowSpanClass = 'hidden';
+                            $content = '';
+                        } else {
+                            // j == 0
+                            $rowSpanClass = 'row-span-1';
+                            $content = 'Gedung Perpustakaan';
+                        }
+                    @endphp
+
+                    <div
+                        class="bg-gray-500 rounded-xl relative w-full flex items-center justify-center {{ $rowSpanClass }} p-4">
+                        @if ($content)
+                            <div class="text-center text-lg font-semibold">
+                                {{ $content }}
+                            </div>
+                        @endif
+                    </div>
+                @endfor
+            </div>
             <!-- Jalan vertikal -->
             <div class="row-span-full flex flex-col items-center justify-center">
                 <div class="w-full h-full bg-gray-700 rounded-xl relative">
